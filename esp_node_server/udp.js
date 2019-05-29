@@ -40,7 +40,7 @@ client.on('message', function (message1, remote) {
 const mongo = require('mongodb').MongoClient
 
 // Do not store the password on GitHub!
-const url = 'mongodb+srv://fullstack:ÖÖÖÖ@exmplcluster-c4xch.mongodb.net/iotlab4'
+const url = 'mongodb+srv://fullstack:ÄÄÄÄ@exmplcluster-c4xch.mongodb.net/iotlab4'
 
 
 
