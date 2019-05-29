@@ -13,25 +13,58 @@ app.use(bodyParser.json())
 
 
 
+const formatReading = (reading) => {
+    return {
+      
+          sensor: reading.sensor,    
+          gx: reading.gx,
+          gy: reading.gy,
+          gz: reading.gz
+        
+    }
+  }
+  
+  
+
+
+
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World!</h1>')
+  })
+ 
+
+
+  app.get('/api/reading', (req, res) => {
+    
+    Reading
+    .find({})
+    .then(reading => {
+      res.json(reading.map(formatReading))
+    })
+    .catch(error => {
+      console.log(error)
+      response.status(404).send({ error: '404' })
+    })
+})
+
 
 
 app.post('/api/reading', (request, response) => {
     const body = request.body
   
     
-    const reading = new Reading ({
+    const reading = {
         sensor: body.sensor,
         gx: body.gx,
         gy: body.gy,
-        gz: body.gz,
-       
-        id: (Math.round(Math.random() * (100000)))
-    })
+        gz: body.gz
+    }
   
-    reading
-      .save()
+    Reading
+      .findOneAndUpdate({sensor: 'sensor'}, reading, {new: true})
       .then(savedReading => {
-        response.json(formatNote(savedReading))
+        response.json(formatReading(savedReading))
     
     })
  
@@ -43,7 +76,8 @@ app.post('/api/reading', (request, response) => {
 
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+const server = app.listen(PORT, () => {
+    const host = server.address().address;
+  console.log(`Server running on port ${PORT} and address: `+host)
 })
 
