@@ -1,2 +1,9 @@
 /interface/node_modules/
 
+/node_modules/
+
+/esp_node_server/node_modules/
+
+/esp_node_server/udp.js
+
+
