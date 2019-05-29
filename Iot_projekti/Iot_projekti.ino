@@ -20,7 +20,7 @@ Adafruit_BME280 sensor;
 
 ESP8266WiFiMulti WiFiMulti;
 
-  const char* ssid = "OnePlus 5T"; const char* password = "12345678"; 
+  const char* ssid = "mokkula_257561"; const char* password = "1153618708"; 
 
   WiFiUDP Udp; 
   unsigned int localUdpPort = 4210;  // local port to listen on 
@@ -109,7 +109,7 @@ void loop()
  
     // send back a reply, to the IP address and port we got the packet from 
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort()); 
-    String json = "{\"sensor\":\"bmi160\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
+    String json = "{\"sensor\":\"BME280\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
     json.toCharArray(replyPacket, 255);
     Udp.write(replyPacket); 
     Udp.endPacket(); 
