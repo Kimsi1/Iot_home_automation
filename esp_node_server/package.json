@@ -1,0 +1,13 @@
+{
+  "name": "esp_node_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "udp.js",
+  "scripts": {
+    "start": "node udp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "author": "",
+  "license": "ISC"
+}
