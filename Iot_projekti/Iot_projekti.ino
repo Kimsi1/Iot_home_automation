@@ -4,11 +4,10 @@
 #include <Adafruit_BME280.h>
 #include <Wire.h>
 #include <ESP8266WiFi.h> 
-#include <WiFiUdp.h> 
 
 
 
-#define IP "http://192.168.8.137:3001/newreading"
+#define IP "http://192.168.8.138:3001/api/reading"
 
 
 
@@ -25,12 +24,7 @@ Adafruit_BME280 sensor;
 
 ESP8266WiFiMulti WiFiMulti;
 
-  const char* ssid = "mokkula_257561"; const char* password = "1153618708"; 
-
-  WiFiUDP Udp; 
-  unsigned int localUdpPort = 4210;  // local port to listen on 
-  char incomingPacket[255];  // buffer for incoming packets 
-  char replyPacket[]="";
+const char* ssid = "mokkula_257561"; const char* password = "1153618708"; 
 
 
 
@@ -65,12 +59,9 @@ void setup() {
   } 
   Serial.println(" connected"); 
  
-  Udp.begin(localUdpPort); 
-  Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort); } 
-
-  
     
- 
+}
+
 void loop() 
 { 
 
@@ -93,12 +84,11 @@ void loop()
   Serial.print("\t");
   Serial.print(gz);
   Serial.println();
-  Serial.println(Udp.remoteIP());
-  Serial.println();
+  
 
   
-  delay(5000);
-  String json = "{\"sensor\":\"BME280\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
+  
+  String json = "{\"sensor\":\"sensor\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
 
   HTTPClient http;
 
@@ -111,38 +101,18 @@ void loop()
 
     if (httpcode == HTTP_CODE_OK)
     {
-      Serial.println("Toimii :D");
+      Serial.println("Transmission OK");
     }else{
-      Serial.println("Ei toimi :(");
+      Serial.println("Transmission failure!");
       Serial.println(httpcode);
     }
 
   http.end();
 
-
-
-  
-  int packetSize = Udp.parsePacket();   
-  if (packetSize) 
-  { 
-    // receive incoming UDP packets 
-    Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort()); 
-    int len = Udp.read(incomingPacket, 255);     
-    if (len > 0) 
-    { 
-      incomingPacket[len] = 0; 
-    } 
-    Serial.printf("UDP packet contents: %s\n", incomingPacket); 
- 
-    // send back a reply, to the IP address and port we got the packet from 
-    Udp.beginPacket(Udp.remoteIP(), Udp.remotePort()); 
-    
-    json.toCharArray(replyPacket, 255);
-    Udp.write(replyPacket); 
-    Udp.endPacket(); 
-  } 
+delay(600000);
   
 
+  
 
 
 
