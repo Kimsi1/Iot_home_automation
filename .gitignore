@@ -5,7 +5,9 @@
 /esp_node_server/node_modules/
 
 
+/server/node_modules/
 
 
-/esp_node_server/*.js
+/server/models/
+
 
