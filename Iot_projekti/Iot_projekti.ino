@@ -29,39 +29,29 @@ ESP8266WiFiMulti WiFiMulti;
 
 
 
+
+
+
 void setup() {
   // put your setup code here, to run once:
 
-Serial.begin(115200);
+
+
+
+  Serial.begin(115200);
 
   Wire.begin();
   if(!sensor.begin(0x76)) {
     Serial.println("Error: Sensor not found!");
   }
 
-  WiFi.mode(WIFI_STA);
-  WiFiMulti.addAP("Pixel_3", "88888888");
-}
-
-
-
-
-
-  
-  while (!Serial);    // wait for the serial port to open
- 
-  // initialize device
-  //BMI160.begin(BMI160GenClass::SPI_MODE, select_pin);
-  
-  //BMI160.begin(BMI160GenClass::I2C_MODE, i2c_addr);
-  
-  //Serial.println(BMI160.getDeviceID(), HEX);
-  Serial.println(); 
-
 
 
  
-  Serial.printf("Connecting to %s ", ssid);   WiFi.begin(ssid, password); 
+  Serial.printf("Connecting to %s ", ssid);   
+  WiFi.begin(ssid, password); 
+
+
   
   while (WiFi.status() != WL_CONNECTED) 
   {     
@@ -73,7 +63,7 @@ Serial.begin(115200);
   Udp.begin(localUdpPort); 
   Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort); } 
 
-
+  
     
  
 void loop() 
@@ -82,7 +72,7 @@ void loop()
   int gx, gy, gz;         // raw gyro values
   
   // read raw gyro measurements from device
-  //BMI160.readGyro(gx, gy, gz);
+  
 
   
   gx = sensor.readTemperature();
