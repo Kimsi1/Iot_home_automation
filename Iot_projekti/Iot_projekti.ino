@@ -8,6 +8,11 @@
 
 
 
+#define IP "http://192.168.8.137:3001/newreading"
+
+
+
+
 //https://github.com/DigitKoodit/iot-workshop/tree/master/embedded
 
 //https://github.com/Kimsi1/IoT-Lab4/tree/master/lab4
@@ -92,7 +97,29 @@ void loop()
   Serial.println();
 
   
-  delay(1000);
+  delay(5000);
+  String json = "{\"sensor\":\"BME280\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
+
+  HTTPClient http;
+
+    Serial.println("[HTTP] begin...");
+
+    http.begin(IP);
+    http.addHeader("Content-Type", "application/json");
+
+    int httpcode = http.POST(json);
+
+    if (httpcode == HTTP_CODE_OK)
+    {
+      Serial.println("Toimii :D");
+    }else{
+      Serial.println("Ei toimi :(");
+      Serial.println(httpcode);
+    }
+
+  http.end();
+
+
 
   
   int packetSize = Udp.parsePacket();   
@@ -109,7 +136,7 @@ void loop()
  
     // send back a reply, to the IP address and port we got the packet from 
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort()); 
-    String json = "{\"sensor\":\"BME280\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
+    
     json.toCharArray(replyPacket, 255);
     Udp.write(replyPacket); 
     Udp.endPacket(); 
