@@ -28,12 +28,35 @@ class App extends React.Component {
       })
   }
         
+  lightsOn=()=> {
+    axios
+      .get('/api/lightson')
+      .then(response => {
+        console.log('promise fulfilled')
+        
+      })
+
+  }
+
+  lightsOff=()=> {
+    axios
+      .get('/api/lightsoff')
+      .then(response => {
+        console.log('promise fulfilled')
+        
+      })
+
+  }
 
   render() {
     return (
       <div>
         <h1>Temperature</h1>
         <h2>{this.state.data.map(data => data.gx)}</h2>
+
+      
+        <button onClick={this.lightsOn}>lights On</button>
+        <button onClick={this.lightsOff}>lights Off</button>
       </div>
     );
   }
