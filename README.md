@@ -19,7 +19,7 @@ The sensor data is saved to a Mongo database operating in a cloud.
 Philips Hue light is controlled through Hue bridge with API calls.
 
 
-![My image](https://raw.githubusercontent.com/Kimsi1/Iot_home_automation/master/diagram.jpg)
+![Diagram](diagram.jpg)
 
 
 # Description
@@ -27,8 +27,14 @@ Philips Hue light is controlled through Hue bridge with API calls.
 Sensor logs temperature, pressure and humidity. These values are displayed in the user interface.
 Interface also has buttons to turn light on and off.
 
-There is also a feature, that when the temperature goes over 35 degrees celsius, the light turns red, and a text "Too hot!" is displayed in the interface.
+There is also a feature, that when the temperature goes over 35 degrees celsius, the Hue light turns red, and a text "Too hot!" is displayed in the interface.
 
 
-![My image](https://raw.githubusercontent.com/Kimsi1/Iot_home_automation/master/Screenshot.jpg)
+![Screenshot1](Screenshot.jpg)
+
+
+![Screenshot2](Screenshot2.jpg)
+
+
+
 
