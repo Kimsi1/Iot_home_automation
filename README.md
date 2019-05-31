@@ -19,5 +19,6 @@ The sensor data is saved to a Mongo database operating in a cloud.
 Philips Hue light is controlled through Hue bridge with API calls.
 
 
-[[https://github.com/Kimsi1/Iot_home_automation/blob/master/Iot%20home%20automation%20diagram.jpg|alt=diagram]]
+![My image](https://github.com/Kimsi1/Iot_home_automation/blob/master/Iot_home_automation_diagram.jpg|alt=diagram)
+
 
