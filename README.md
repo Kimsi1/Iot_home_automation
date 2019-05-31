@@ -29,10 +29,10 @@ Interface also has buttons to turn light on and off.
 
 There is also a feature, that when the temperature goes over 35 degrees celsius, the Hue light turns red, and a text "Too hot!" is displayed in the interface.
 
-
+#Screenshot 1:
 ![Screenshot1](Screenshot.jpg)
 
-
+#Screenshot 2:
 ![Screenshot2](Screenshot2.jpg)
 
 
