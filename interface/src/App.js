@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import Header from './header'
+import HotOrNot from './HotOrNot';
 
 
 
@@ -51,12 +52,15 @@ class App extends React.Component {
 
   }
 
+  
+
   render() {
     return (
       <div style = {divStyle}>
         <Header />
         <h1>Temperature</h1>
-        <h3>{this.state.data.map(data => data.gx)} °C</h3>
+        
+        <HotOrNot temperature={parseInt(this.state.data.map(data => data.gx))} />
         <h1>Pressure</h1>
         <h3>{parseInt(this.state.data.map(data => data.gy))/1000} kPa</h3>
         <h1>Humidity</h1>
