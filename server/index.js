@@ -31,10 +31,6 @@ const state = lightState.create();
 
 
 
-
-
-
-
 const formatReading = (reading) => {
   return {
     
@@ -48,21 +44,37 @@ const formatReading = (reading) => {
 
 
 
-
-
-
+// this page should never be displayed
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+  res.send('<h1>Nothing to see here.</h1>')
 })
 
 
 
-app.get('/api/reading', (req, res) => {
+
+// Set the lamp with id '4' to on as either color red or white, depending on temperature
+app.get('/api/lightson', (req, res) => {
   
+
   Reading
   .find({})
   .then(reading => {
-    res.json(reading.map(formatReading))
+    if (parseInt(reading.map(data => data.gx)) > 35 ){
+      api.setLightState(4, state.on().rgb(255,0,0), function(err, result) {
+        if (err) throw err;
+        displayResult(result);
+        
+      });
+    }
+    if (parseInt(reading.map(data => data.gx)) < 36 ){
+      api.setLightState(4, state.on().rgb(255,250,250), function(err, result) {
+        if (err) throw err;
+        displayResult(result);
+        
+      });
+    }
+
+    res.status(204).end()
   })
   .catch(error => {
     console.log(error)
@@ -71,22 +83,10 @@ app.get('/api/reading', (req, res) => {
 })
 
 
-app.get('/api/lightson', (req, res) => {
-  
-  // Set the lamp with id '4' to on
-
-  api.setLightState(4, state.on(), function(err, result) {
-    if (err) throw err;
-    displayResult(result);
-    res.status(204).end()
-  });
-
-})
 
 
+// Turn off the lamp id '4'
 app.get('/api/lightsoff', (req, res) => {
-  
-  // Turn off the lamp id '4'
 
   api.setLightState(4, state.off(), function(err, result) {
     if (err) throw err;
@@ -99,12 +99,21 @@ app.get('/api/lightsoff', (req, res) => {
 
 
 
-
+// return sensor data from cloud database
 app.get('/api/reading', (req, res) => {
   
+  // if temperature is over 35, turn light on with red color
   Reading
   .find({})
   .then(reading => {
+    if (parseInt(reading.map(data => data.gx)) > 35 ){
+      api.setLightState(4, state.on().rgb(255,0,0), function(err, result) {
+        if (err) throw err;
+        displayResult(result);
+        
+      });
+    }
+
     res.json(reading.map(formatReading))
   })
   .catch(error => {
@@ -116,8 +125,7 @@ app.get('/api/reading', (req, res) => {
 
 
 
-
-
+// save data from sensor to cloud database
 app.post('/api/reading', (request, response) => {
   const body = request.body
 

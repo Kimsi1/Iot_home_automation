@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-
+import Header from './header'
 
 
 
@@ -14,7 +14,8 @@ class App extends React.Component {
       sensor: 'sensor',
       gx: '', 
       gy: '',
-      gz: ''
+      gz: '',
+      lightOn: false
     }
   }
 
@@ -33,6 +34,7 @@ class App extends React.Component {
       .get('/api/lightson')
       .then(response => {
         console.log('promise fulfilled')
+        this.setState({lightOn: true})
         
       })
 
@@ -43,6 +45,7 @@ class App extends React.Component {
       .get('/api/lightsoff')
       .then(response => {
         console.log('promise fulfilled')
+        this.setState({lightOn: false})
         
       })
 
@@ -50,9 +53,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style = {divStyle}>
+        <Header />
         <h1>Temperature</h1>
-        <h2>{this.state.data.map(data => data.gx)}</h2>
+        <h3>{this.state.data.map(data => data.gx)} °C</h3>
+        <h1>Pressure</h1>
+        <h3>{parseInt(this.state.data.map(data => data.gy))/1000} kPa</h3>
+        <h1>Humidity</h1>
+        <h3>{this.state.data.map(data => data.gz)} %</h3>
 
       
         <button onClick={this.lightsOn}>lights On</button>
@@ -61,5 +69,15 @@ class App extends React.Component {
     );
   }
 }
+
+const divStyle = {
+  background: '#fff',
+  color: '#333',
+  textAlign: 'center',
+  padding: '10px'
+}
+
+
+
 
 export default App;

@@ -12,16 +12,12 @@
 
 
 
-//https://github.com/DigitKoodit/iot-workshop/tree/master/embedded
-
-//https://github.com/Kimsi1/IoT-Lab4/tree/master/lab4
-
 
 
 // Initialize sensor
 Adafruit_BME280 sensor;
 
-
+// Initialize Wifi
 ESP8266WiFiMulti WiFiMulti;
 
 const char* ssid = "mokkula_257561"; const char* password = "1153618708"; 
@@ -46,7 +42,7 @@ void setup() {
 
 
 
- 
+  // connect to wifi
   Serial.printf("Connecting to %s ", ssid);   
   WiFi.begin(ssid, password); 
 
@@ -69,8 +65,6 @@ void loop()
   
   // read raw gyro measurements from device
   
-
-  
   gx = sensor.readTemperature();
   gy = sensor.readPressure();
   gz = sensor.readHumidity();
@@ -87,9 +81,10 @@ void loop()
   
 
   
-  
+  // display values as JSON format
   String json = "{\"sensor\":\"sensor\",\"gx\":\"" + String(gx) + "\",\"gy\":\"" + String(gy) + "\",\"gz\":\"" + String(gz)+ "\"}";
 
+  // send the JSON data as a HTTP POST request
   HTTPClient http;
 
     Serial.println("[HTTP] begin...");
@@ -109,6 +104,7 @@ void loop()
 
   http.end();
 
+// wait 10 minutes
 delay(600000);
   
 
