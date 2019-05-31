@@ -35,6 +35,9 @@ There is also a feature, that when the temperature goes over 35 degrees celsius,
 # Screenshot 2:
 ![Screenshot2](Screenshot2.jpg)
 
+# Images:
 
+![image1](WhiteLightOn.jpg)
+![image2](RedLightOn.jpg)
 
 
