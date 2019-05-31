@@ -22,3 +22,11 @@ Philips Hue light is controlled through Hue bridge with API calls.
 ![My image](https://raw.githubusercontent.com/Kimsi1/Iot_home_automation/master/Iot%20home%20automation%20diagram.jpg?token=ALGLJK5DFS5JBTITH4RXXIK46GEO2)
 
 
+# Description
+
+Sensor logs temperature, pressure and humidity. These values are displayed in the user interface.
+Interface also has buttons to turn light on and off.
+
+There is also a feature, that when the temperature goes over 35 degrees celsius, the light turns red, and a text "Too hot!" is displayed in the interface.
+
+
